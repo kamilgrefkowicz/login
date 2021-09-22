@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -6,56 +7,24 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
-  email: string = '';
-  password: string = '';
-  emailValidated = true;
-  passwordValidated = true;
-  processingLogin = false;
-
   @Output()
   validatedUserData = new EventEmitter<{ email: string; password: string }>();
 
+  loginForm: FormGroup;
+
   constructor() {}
 
-  ngOnInit(): void {}
-
-  inputEmail(event: Event) {
-    this.email = (<HTMLInputElement>event.target).value;
-    this.clearValidation();
-  }
-  inputPassword(event: Event) {
-    this.password = (<HTMLInputElement>event.target).value;
-    this.clearValidation();
+  ngOnInit() {
+    this.loginForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required),
+    });
   }
 
-  clearValidation() {
-    this.emailValidated = true;
-    this.passwordValidated = true;
-  }
-
-  attemptLogin() {
-    if (this.inputIsValid()) {
-      this.validatedUserData.emit({
-        email: this.email,
-        password: this.password,
-      });
-    }
-  }
-
-  inputIsValid() {
-    this.validatePassword();
-    this.validateEmail();
-    return this.passwordValidated && this.emailValidated;
-  }
-  validatePassword() {
-    if (this.password.length < 6) {
-      this.passwordValidated = false;
-    }
-  }
-  validateEmail() {
-    let emailRegex = /^\S+@\S+\.\S+$/;
-    if (!this.email.match(emailRegex)) {
-      this.emailValidated = false;
-    }
+  onSubmit() {
+    this.validatedUserData.emit({
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
+    });
   }
 }

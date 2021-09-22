@@ -1,16 +1,29 @@
-<form class="form-control">
-  <label for="email"
-    >Email:<span class="input-warning" *ngIf="!emailValidated"
+<form class="container" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="email">Email: </label>
+    <input
+      type="text"
+      id="email"
+      class="form-control"
+      formControlName="email"
+    />
+    <span
+      class="input-warning"
+      *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched"
       >Please provide a valid email</span
-    ></label
-  >
-
-  <input type="text" id="email" (input)="inputEmail($event)" />
-  <label for="password"
-    >Password:<span class="input-warning" *ngIf="!passwordValidated"
+    >
+  </div>
+  <hr />
+  <div class="form-group">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password" />
+    <span
+      class="input-warning"
+      *ngIf="
+        !loginForm.get('password').valid && loginForm.get('password').touched
+      "
       >Password needs to be at least 6 characters long</span
-    ></label
-  >
-  <input type="password" id="password" (input)="inputPassword($event)" />
-  <button type="button" (click)="attemptLogin()">Log in</button>
+    >
+  </div>
+  <button type="submit" [disabled]="!loginForm.valid">Log in</button>
 </form>
