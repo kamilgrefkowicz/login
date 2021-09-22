@@ -1,0 +1,50 @@
+.form-control {
+  margin: 0.5rem 0;
+}
+
+.form-control label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: flex;
+  padding: 0.5rem 0.5rem;
+  justify-content: stretch;
+  cursor: inherit;
+}
+.form-control input {
+  display: block;
+  border: 1px solid rgb(160, 160, 160);
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  cursor: inherit;
+}
+
+.form-control button {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  background-color: #d1b47e;
+  border: 2px solid rgb(146, 109, 40);
+  border-radius: 3px;
+  cursor: inherit;
+}
+
+.form-control button:hover,
+.form-control button:active {
+  background-color: rgb(146, 109, 40);
+  cursor: inherit;
+}
+
+.form-control button:focus {
+  outline: none;
+  cursor: inherit;
+}
+
+.input-warning {
+  background-color: pink;
+  border: 1px solid red;
+  padding: 0 0.5rem;
+  border-radius: 3px;
+  font-weight: 400;
+  cursor: inherit;
+}

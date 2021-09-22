@@ -1,0 +1,16 @@
+<form class="form-control">
+  <label for="email"
+    >Email:<span class="input-warning" *ngIf="!emailValidated"
+      >Please provide a valid email</span
+    ></label
+  >
+
+  <input type="text" id="email" (input)="inputEmail($event)" />
+  <label for="password"
+    >Password:<span class="input-warning" *ngIf="!passwordValidated"
+      >Password needs to be at least 6 characters long</span
+    ></label
+  >
+  <input type="password" id="password" (input)="inputPassword($event)" />
+  <button type="button" (click)="attemptLogin()">Log in</button>
+</form>
